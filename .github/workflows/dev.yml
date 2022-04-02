@@ -1,6 +1,9 @@
 name: Development Workflow
 
 on:
+  push:
+    branches:
+      - 'master'
   pull_request:
     branches:
       - 'master'

@@ -28,14 +28,25 @@ def test_login_validate_input(auth, username, password, message):
 
 """Tests password confirmation & meeting password criteria"""
 @pytest.mark.parametrize(
-    ("username", "password", "message"),
+    ("db.session", "password", "message"),
     (
         ("", "", b"Username is required."),
         ("a", "", b"Password is required."),
         ("test", "test", b"already registered"),
+    ),
+    ("password", "message"),
+    (
+        ("len(password)<5", b"Password must be atleast 5 characters."),
+        ("", b"Password must include both letters and numbers."),
+        ("len(password)>20", b"Password must not be longer than 20 characters"),
     ),
 )
 def test_register_validate_input(client, username, password, message):
     response = client.post(
         "/auth/register", data={"username": username, "password": password}
     )
+
+
+"""denying access to the dashboard for not logged in users"""
+
+"""allowing access to the dashboard for logged in users"""
