@@ -21,6 +21,10 @@ def login():
             user.authenticated = True
             db.session.add(user)
             db.session.commit()
+            if user.id == 1:
+                user.is_admin = 1
+                db.session.add(user)
+                db.session.commit()
             login_user(user)
             flash("Welcome")
             return redirect(url_for('auth.dashboard'))

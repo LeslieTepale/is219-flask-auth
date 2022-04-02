@@ -33,7 +33,7 @@ def create_app():
     app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
     login_manager.init_app(app)
     login_manager.login_view = "auth.login"
-
+    app.config['WTF_CSRF_ENABLED'] = False
     bootstrap = Bootstrap5(app)
     app.register_blueprint(simple_pages)
     app.register_blueprint(auth)
@@ -57,3 +57,4 @@ def user_loader(user_id):
         return User.query.get(int(user_id))
     except:
         return None
+
